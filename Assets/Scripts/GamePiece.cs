@@ -22,6 +22,21 @@ public class GamePiece : MonoBehaviour
         SmootherStep
     };
 
+    public MatchValue matchValue;
+
+    public enum MatchValue
+    {
+        Yellow,
+        Blue,
+        Magenta,
+        Indigo,
+        Green,
+        Teal,
+        Red,
+        Cyan,
+        Wild
+    }
+
     void Start()
     {
 
