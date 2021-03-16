@@ -30,7 +30,7 @@ public class Board : MonoBehaviour
 
         SetUpTiles();
         SetupCamera();
-        FillBoard();
+        FillBoard(10, 0.5f);
     }
 
     void SetUpTiles()
@@ -98,7 +98,7 @@ public class Board : MonoBehaviour
         return (x >= 0 && x < width && y >= 0 && y < height);
     }
 
-    GamePiece FillRandomAt(int x, int y)
+    GamePiece FillRandomAt(int x, int y, int falseYOffset = 0, float moveTime = 0.1f)
     {
         GameObject randomPiece = Instantiate(GetRandomGamePiece(), Vector3.zero, Quaternion.identity) as GameObject; // Not sure if we need to cast this these days
 
@@ -106,13 +106,20 @@ public class Board : MonoBehaviour
         {
             randomPiece.GetComponent<GamePiece>().Init(this);
             PlaceGamePiece(randomPiece.GetComponent<GamePiece>(), x, y);
+
+            if (falseYOffset != 0)
+            {
+                randomPiece.transform.position = new Vector3(x, y + falseYOffset, 0);
+                randomPiece.GetComponent<GamePiece>().Move(x, y, moveTime);
+            }
+
             randomPiece.transform.parent = transform;
             return randomPiece.GetComponent<GamePiece>();
         }
         return null;
     }
 
-    void FillBoard()
+    void FillBoard(int falseYOffset = 0, float moveTime = 0.1f)
     {
         int maxIterations = 100;
         int iterations = 0;
@@ -121,19 +128,22 @@ public class Board : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                GamePiece piece = FillRandomAt(i, j);
-                iterations = 0;
-
-                while (HasMatchOnFill(i, j))
+                if (m_allGamePieces[i, j] == null)
                 {
-                    ClearPieceAt(i, j);
-                    piece = FillRandomAt(i, j);
-                    iterations++;
+                    GamePiece piece = FillRandomAt(i, j, falseYOffset, moveTime);
+                    iterations = 0;
 
-                    if (iterations >= maxIterations)
+                    while (HasMatchOnFill(i, j))
                     {
-                        Debug.Log("break ==========================");
-                        break;
+                        ClearPieceAt(i, j);
+                        piece = FillRandomAt(i, j, falseYOffset, moveTime);
+                        iterations++;
+
+                        if (iterations >= maxIterations)
+                        {
+                            Debug.Log("break ==========================");
+                            break;
+                        }
                     }
                 }
             }
@@ -370,6 +380,22 @@ public class Board : MonoBehaviour
         return matches;
     }
 
+    List<GamePiece> FindAllMatches()
+    {
+        List<GamePiece> combinedMatches = new List<GamePiece>();
+
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                List<GamePiece> matches = FindMatchesAt(i, j);
+                combinedMatches = combinedMatches.Union(matches).ToList();
+            }
+        }
+
+        return combinedMatches;
+    }
+
     void HighlightTileOff(int x, int y)
     {
         SpriteRenderer spriteRenderer = m_allTiles[x, y].GetComponent<SpriteRenderer>();
@@ -522,13 +548,29 @@ public class Board : MonoBehaviour
     IEnumerator ClearAndRefillBoardRoutine(List<GamePiece> gamePieces)
     {
         m_playerInputEnabled = false;
+        List<GamePiece> matches = gamePieces;
 
-        // clear and collapse
-        yield return StartCoroutine(ClearAndCollapseRoutine(gamePieces));
-        yield return null;
+        do
+        {
+            // clear and collapse
+            yield return StartCoroutine(ClearAndCollapseRoutine(matches));
+            yield return null;
 
-        // refill
+            // refill
+            yield return StartCoroutine(RefillRoutine());
+            matches = FindAllMatches();
+
+            yield return new WaitForSeconds(0.5f);
+        }
+        while (matches.Count != 0);
+
         m_playerInputEnabled = true;
+    }
+
+    IEnumerator RefillRoutine()
+    {
+        FillBoard(10, 0.5f);
+        yield return null;
     }
 
     IEnumerator ClearAndCollapseRoutine(List<GamePiece> gamePieces)
@@ -552,7 +594,7 @@ public class Board : MonoBehaviour
                 yield return null;
             }
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.2f);
 
             matches = FindMatchesAt(movingPieces);
 
