@@ -231,16 +231,36 @@ MonoBehaviour:
   - {fileID: 5988262699353960789, guid: 62129cab2258f4ed3b86c2fa5aa28c1c, type: 3}
   swapTime: 0.5
   startingTiles:
-  - tilePrefab: {fileID: 1402642695515876241, guid: c132a7e7a3bba49bc9047bf0eab30fcc,
+  - tilePrefab: {fileID: 7526009591046200743, guid: 6ecfa55947a98469590d15b4177715c3,
       type: 3}
-    x: 3
+    x: 2
+    y: 2
+    z: 0
+  - tilePrefab: {fileID: 7526009591046200743, guid: 6ecfa55947a98469590d15b4177715c3,
+      type: 3}
+    x: 2
+    y: 3
+    z: 0
+  - tilePrefab: {fileID: 7526009591046200743, guid: 6ecfa55947a98469590d15b4177715c3,
+      type: 3}
+    x: 2
     y: 4
-    z: 1
+    z: 0
+  - tilePrefab: {fileID: 7526009591046200743, guid: 6ecfa55947a98469590d15b4177715c3,
+      type: 3}
+    x: 2
+    y: 5
+    z: 0
+  - tilePrefab: {fileID: 3577393267178891853, guid: 7d834385fde944171b02b82d7bff8e52,
+      type: 3}
+    x: 4
+    y: 2
+    z: 0
   - tilePrefab: {fileID: 1402642695515876241, guid: c132a7e7a3bba49bc9047bf0eab30fcc,
       type: 3}
-    x: 5
-    y: 5
-    z: 1
+    x: 4
+    y: 3
+    z: 0
 --- !u!4 &174144693
 Transform:
   m_ObjectHideFlags: 0
