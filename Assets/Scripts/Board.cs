@@ -719,4 +719,49 @@ public class Board : MonoBehaviour
         }
         return true;
     }
+
+    List<GamePiece> GetRowPieces(int row)
+    {
+        List<GamePiece> gamePieces = new List<GamePiece>();
+
+        for (int i = 0; i < width, i++)
+        {
+            if (m_allGamePieces[i, row] != null)
+            {
+                gamePieces.Add(m_allGamePieces[i, row]);
+            }
+        }
+        return gamePieces;
+    }
+
+    List<GamePiece> GetColumnPieces(int column)
+    {
+        List<GamePiece> gamePieces = new List<GamePiece>();
+
+        for (int i = 0; i < height, i++)
+        {
+            if (m_allGamePieces[column, i] != null)
+            {
+                gamePieces.Add(m_allGamePieces[column, i]);
+            }
+        }
+        return gamePieces;
+    }
+
+    List<GamePiece> GetAdjacentPieces(int x, int y, int offset = 1)
+    {
+        List<GamePiece> gamePieces = new List<GamePiece>();
+
+        for (int i = x - offset; i <= x + offset; i++)
+        {
+            for (int j = y - offset; j <= y + offset; j++)
+            {
+                if (IsWithinBounds(i, j))
+                {
+                    gamePieces.Add(m_allGamePieces[i, j]);
+                }
+            }
+        }
+        return gamePieces;
+    }
 }
