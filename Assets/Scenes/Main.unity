@@ -237,6 +237,10 @@ MonoBehaviour:
     type: 3}
   colorBombPrefab: {fileID: 4951452541784865300, guid: 8837a105914674fe080bd73cc1e175db,
     type: 3}
+  maxCollectibles: 3
+  collectibleCount: 0
+  chanceForCollectible: 0.1
+  collectiblePrefabs: []
   swapTime: 0.5
   startingTiles:
   - prefab: {fileID: 7526009591046200743, guid: 6ecfa55947a98469590d15b4177715c3,
@@ -270,30 +274,20 @@ MonoBehaviour:
     y: 3
     z: 0
   startingGamePieces:
-  - prefab: {fileID: 1339706345907938693, guid: dea5825ea2efb472cbab90d034969eea,
-      type: 3}
-    x: 3
-    y: 3
-    z: 0
-  - prefab: {fileID: 1339706345907938693, guid: dea5825ea2efb472cbab90d034969eea,
-      type: 3}
-    x: 3
-    y: 4
-    z: 0
-  - prefab: {fileID: 1339706345907938693, guid: dea5825ea2efb472cbab90d034969eea,
-      type: 3}
-    x: 3
-    y: 6
-    z: 0
-  - prefab: {fileID: 1339706345907938693, guid: dea5825ea2efb472cbab90d034969eea,
-      type: 3}
-    x: 3
-    y: 7
-    z: 0
-  - prefab: {fileID: 1339706345907938693, guid: dea5825ea2efb472cbab90d034969eea,
+  - prefab: {fileID: 3826725546140223371, guid: 5aa817a46a2a24272bd58f706780eaa1,
       type: 3}
     x: 4
     y: 5
+    z: 0
+  - prefab: {fileID: 3826725546140223371, guid: 5aa817a46a2a24272bd58f706780eaa1,
+      type: 3}
+    x: 5
+    y: 5
+    z: 0
+  - prefab: {fileID: 3826725546140223371, guid: 5aa817a46a2a24272bd58f706780eaa1,
+      type: 3}
+    x: 6
+    y: 6
     z: 0
   fillYOffset: 10
   fillMoveTime: 0.5
