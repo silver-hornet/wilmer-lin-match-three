@@ -235,6 +235,8 @@ MonoBehaviour:
     type: 3}
   rowBombPrefab: {fileID: 5446270782635888767, guid: 3e93fea8f3b4f4f2a96dfd8d4874d290,
     type: 3}
+  colorBombPrefab: {fileID: 4951452541784865300, guid: 8837a105914674fe080bd73cc1e175db,
+    type: 3}
   swapTime: 0.5
   startingTiles:
   - prefab: {fileID: 7526009591046200743, guid: 6ecfa55947a98469590d15b4177715c3,
@@ -268,44 +270,30 @@ MonoBehaviour:
     y: 3
     z: 0
   startingGamePieces:
-  - prefab: {fileID: 5988262699353960789, guid: 62129cab2258f4ed3b86c2fa5aa28c1c,
+  - prefab: {fileID: 1339706345907938693, guid: dea5825ea2efb472cbab90d034969eea,
       type: 3}
     x: 3
     y: 3
     z: 0
-  - prefab: {fileID: 5988262699353960789, guid: 62129cab2258f4ed3b86c2fa5aa28c1c,
+  - prefab: {fileID: 1339706345907938693, guid: dea5825ea2efb472cbab90d034969eea,
       type: 3}
     x: 3
     y: 4
     z: 0
-  - prefab: {fileID: 5988262699353960789, guid: 62129cab2258f4ed3b86c2fa5aa28c1c,
+  - prefab: {fileID: 1339706345907938693, guid: dea5825ea2efb472cbab90d034969eea,
       type: 3}
     x: 3
     y: 6
     z: 0
-  - prefab: {fileID: 5988262699353960789, guid: 62129cab2258f4ed3b86c2fa5aa28c1c,
+  - prefab: {fileID: 1339706345907938693, guid: dea5825ea2efb472cbab90d034969eea,
       type: 3}
-    x: 4
-    y: 5
-    z: 0
-  - prefab: {fileID: 5988262699353960789, guid: 62129cab2258f4ed3b86c2fa5aa28c1c,
-      type: 3}
-    x: 5
-    y: 4
-    z: 0
-  - prefab: {fileID: 5988262699353960789, guid: 62129cab2258f4ed3b86c2fa5aa28c1c,
-      type: 3}
-    x: 6
-    y: 4
-    z: 0
-  - prefab: {fileID: 5988262699353960789, guid: 62129cab2258f4ed3b86c2fa5aa28c1c,
-      type: 3}
-    x: 5
-    y: 5
-    z: 0
-  - prefab: {fileID: 267341259978590106, guid: 24f3ae8fab6204905afe2c4e10bafa55, type: 3}
-    x: 4
+    x: 3
     y: 7
+    z: 0
+  - prefab: {fileID: 1339706345907938693, guid: dea5825ea2efb472cbab90d034969eea,
+      type: 3}
+    x: 4
+    y: 5
     z: 0
   fillYOffset: 10
   fillMoveTime: 0.5
