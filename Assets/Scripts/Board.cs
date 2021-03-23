@@ -160,16 +160,24 @@ public class Board : MonoBehaviour
         Camera.main.orthographicSize = (verticalSize > horizontalSize) ? verticalSize : horizontalSize;
     }
 
+    GameObject GetRandomObject(GameObject[] objectArray)
+    {
+        int randomIdx = Random.Range(0, objectArray.Length);
+        if (objectArray[randomIdx] == null)
+        {
+            Debug.LogWarning("BOARD.GetRandomObject at index " + randomIdx + " does not contain a valid GameObject!");
+        }
+        return objectArray[randomIdx];
+    }
+
     GameObject GetRandomGamePiece()
     {
-        int randomIndex = Random.Range(0, gamePiecePrefabs.Length);
+        return GetRandomObject(gamePiecePrefabs);
+    }
 
-        if (gamePiecePrefabs[randomIndex] == null)
-        {
-            Debug.LogWarning("BOARD: " + randomIndex + "does not contain a valid GamePiece prefab!");
-        }
-
-        return gamePiecePrefabs[randomIndex];
+    GameObject GetRandomCollectible()
+    {
+        return GetRandomObject(collectiblePrefabs);
     }
 
     public void PlaceGamePiece(GamePiece gamePiece, int x, int y)
@@ -194,12 +202,23 @@ public class Board : MonoBehaviour
         return (x >= 0 && x < width && y >= 0 && y < height);
     }
 
-    GamePiece FillRandomAt(int x, int y, int falseYOffset = 0, float moveTime = 0.1f)
+    GamePiece FillRandomGamePieceAt(int x, int y, int falseYOffset = 0, float moveTime = 0.1f)
     {
         if (IsWithinBounds(x, y))
         {
             GameObject randomPiece = Instantiate(GetRandomGamePiece(), Vector3.zero, Quaternion.identity) as GameObject; // Not sure if we need to cast this these days
 
+            MakeGamePiece(randomPiece, x, y, falseYOffset, moveTime);
+            return randomPiece.GetComponent<GamePiece>();
+        }
+        return null;
+    }
+
+    GamePiece FillRandomCollectibleAt(int x, int y, int falseYOffset = 0, float moveTime = 0.1f)
+    {
+        if (IsWithinBounds(x, y))
+        {
+            GameObject randomPiece = Instantiate(GetRandomCollectible(), Vector3.zero, Quaternion.identity) as GameObject;
             MakeGamePiece(randomPiece, x, y, falseYOffset, moveTime);
             return randomPiece.GetComponent<GamePiece>();
         }
@@ -217,19 +236,27 @@ public class Board : MonoBehaviour
             {
                 if (m_allGamePieces[i, j] == null && m_allTiles[i, j].tileType != TileType.Obstacle)
                 {
-                    GamePiece piece = FillRandomAt(i, j, falseYOffset, moveTime);
-                    iterations = 0;
-
-                    while (HasMatchOnFill(i, j))
+                    GamePiece piece = null;
+                    if (j == height - 1 && CanAddCollectible())
                     {
-                        ClearPieceAt(i, j);
-                        piece = FillRandomAt(i, j, falseYOffset, moveTime);
-                        iterations++;
+                        piece = FillRandomCollectibleAt(i, j, falseYOffset, moveTime);
+                        collectibleCount++;
+                    }
+                    else
+                    {
+                        piece = FillRandomGamePieceAt(i, j, falseYOffset, moveTime);
+                        iterations = 0;
 
-                        if (iterations >= maxIterations)
+                        while (HasMatchOnFill(i, j))
                         {
-                            Debug.Log("break ==========================");
-                            break;
+                            ClearPieceAt(i, j);
+                            piece = FillRandomGamePieceAt(i, j, falseYOffset, moveTime);
+                            iterations++;
+
+                            if (iterations >= maxIterations)
+                            {
+                                break;
+                            }
                         }
                     }
                 }
@@ -763,6 +790,11 @@ public class Board : MonoBehaviour
             bombedPieces = GetBombedPieces(gamePieces);
             gamePieces = gamePieces.Union(bombedPieces).ToList();
 
+            List<GamePiece> collectedPieces = FindCollectiblesAt(0);
+            collectibleCount -= collectedPieces.Count;
+
+            gamePieces = gamePieces.Union(collectedPieces).ToList();
+
             ClearPieceAt(gamePieces, bombedPieces);
             BreakTileAt(gamePieces);
 
@@ -1051,5 +1083,10 @@ public class Board : MonoBehaviour
             foundCollectibles = foundCollectibles.Union(collectibleRow).ToList();
         }
         return foundCollectibles;
+    }
+
+    bool CanAddCollectible()
+    {
+        return (Random.Range(0f, 1f) <= chanceForCollectible && collectiblePrefabs.Length > 0 && collectibleCount < maxCollectibles);
     }
 }
