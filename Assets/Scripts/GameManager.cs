@@ -17,6 +17,13 @@ public class GameManager : Singleton<GameManager>
     bool m_isReadyToBegin = false;
     bool m_isGameOver = false;
     bool m_isWinner = false;
+    bool m_isReadyToReload = false;
+
+    public MessageWindow messageWindow;
+
+    public Sprite loseIcon;
+    public Sprite winIcon;
+    public Sprite goalIcon;
 
     void Start()
     {
@@ -48,13 +55,22 @@ public class GameManager : Singleton<GameManager>
         yield return StartCoroutine("EndGameRoutine");
     }
 
+    public void BeginGame()
+    {
+        m_isReadyToBegin = true;
+    }
+
     IEnumerator StartGameRoutine()
     {
+        if (messageWindow != null)
+        {
+            messageWindow.GetComponent<RectXformMover>().MoveOn();
+            messageWindow.ShowMessage(goalIcon, "score goal\n" + scoreGoal.ToString(), "start");
+        }
+
         while (!m_isReadyToBegin)
         {
             yield return null;
-            yield return new WaitForSeconds(2f);
-            m_isReadyToBegin = true;
         }
 
         if (screenFader != null)
@@ -86,6 +102,8 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator EndGameRoutine()
     {
+        m_isReadyToReload = false;
+
         if (screenFader != null)
         {
             screenFader.FadeOn();
@@ -93,13 +111,28 @@ public class GameManager : Singleton<GameManager>
 
         if (m_isWinner)
         {
-            Debug.Log("You win!");
+            if (messageWindow != null)
+            {
+                messageWindow.GetComponent<RectXformMover>().MoveOn();
+                messageWindow.ShowMessage(winIcon, "YOU WIN!", "OK");
+            }
         }
         else
         {
-            Debug.Log("You lose!");
+            messageWindow.GetComponent<RectXformMover>().MoveOn();
+            messageWindow.ShowMessage(loseIcon, "YOU LOSE!", "OK");
         }
 
-        yield return null;
+        while (!m_isReadyToReload)
+        {
+            yield return null;
+        }
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ReloadScene()
+    {
+        m_isReadyToReload = true;
     }
 }

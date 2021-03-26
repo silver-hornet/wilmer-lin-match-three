@@ -701,6 +701,10 @@ MonoBehaviour:
   screenFader: {fileID: 1367973535}
   levelNameText: {fileID: 2054622436}
   movesLeftText: {fileID: 1515980554}
+  messageWindow: {fileID: 1927435643}
+  loseIcon: {fileID: 21300000, guid: 5b4ca2bf6b6a9443484dcc947dff17c3, type: 3}
+  winIcon: {fileID: 21300000, guid: 545bb92fc1961474aa9800c62562ed1e, type: 3}
+  goalIcon: {fileID: 21300000, guid: 024709aea941640fa9f60e814b62bb89, type: 3}
 --- !u!1 &328946712
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,7 +991,40 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 978878709}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 295057209}
+        m_MethodName: BeginGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1927435642}
+        m_MethodName: MoveOff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 295057209}
+        m_MethodName: ReloadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &978878709
 MonoBehaviour:
   m_ObjectHideFlags: 0
