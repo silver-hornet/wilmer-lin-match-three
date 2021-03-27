@@ -683,7 +683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movesLeft: 25
-  scoreGoal: 8000
+  scoreGoal: 6000
   screenFader: {fileID: 1367973535}
   levelNameText: {fileID: 2054622436}
   movesLeftText: {fileID: 1515980554}
@@ -1204,6 +1204,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 56e813bd88354448fb9f0a52536449a1, type: 3}
   - {fileID: 8300000, guid: eadcfb9a0c2cb4bea8112ac470640c8e, type: 3}
   - {fileID: 8300000, guid: 6dce900c6b57748dbb2ee112588b2bd9, type: 3}
+  musicSourceName: BackgroundMusic
   musicVolume: 0.5
   fxVolume: 1
   lowPitch: 0.95

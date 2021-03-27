@@ -9,6 +9,8 @@ public class SoundManager : Singleton<SoundManager>
     public AudioClip[] loseClips;
     public AudioClip[] bonusClips;
 
+    public string musicSourceName = "BackgroundMusic";
+
     [Range(0, 1)] public float musicVolume = 0.5f;
     [Range(0, 1)] public float fxVolume = 1.0f;
 
@@ -17,33 +19,48 @@ public class SoundManager : Singleton<SoundManager>
 
     void Start()
     {
-        PlayMusic();
+        PlayMusic(true);
     }
 
-    public AudioSource PlayClipAtPoint(AudioClip clip, Vector3 position, float volume = 1f)
+    public AudioSource PlayClipAtPoint(AudioClip clip, Vector3 position, float volume = 1f, bool randomizePitch = true, bool selfdestruct = true)
     {
         if (clip != null)
         {
+            // create a new GameObject at the specified world space position
             GameObject go = new GameObject("SoundFX" + clip.name);
             go.transform.position = position;
 
+            // add an AudioSource component and set the AudioClip
             AudioSource source = go.AddComponent<AudioSource>();
             source.clip = clip;
 
-            float randomPitch = Random.Range(lowPitch, highPitch);
-            source.pitch = randomPitch;
+            // change the pitch of the sound within some variation
+            if (randomizePitch)
+            {
+                float randomPitch = Random.Range(lowPitch, highPitch);
+                source.pitch = randomPitch;
+            }
 
+            // set the volume
             source.volume = volume;
 
+            // play the sound
             source.Play();
-            Destroy(go, clip.length);
+
+            // destroy the AudioSource after the clip is done playing
+            if (selfdestruct)
+            {
+                Destroy(go, clip.length);
+            }
+
+            // return our AudioSource out of the method
             return source;
         }
 
         return null;
     }
 
-    public AudioSource PlayRandom(AudioClip[] clips, Vector3 position, float volume = 1f)
+    public AudioSource PlayRandom(AudioClip[] clips, Vector3 position, float volume = 1f, bool randomizePitch = true, bool selfdestruct = true)
     {
         if (clips != null)
         {
@@ -53,7 +70,7 @@ public class SoundManager : Singleton<SoundManager>
 
                 if (clips[randomIndex] != null)
                 {
-                    AudioSource source = PlayClipAtPoint(clips[randomIndex], position, volume);
+                    AudioSource source = PlayClipAtPoint(clips[randomIndex], position, volume, randomizePitch, selfdestruct);
                     return source;
                 }
             }
@@ -62,9 +79,21 @@ public class SoundManager : Singleton<SoundManager>
         return null;
     }
 
-    public void PlayMusic()
+    public void PlayMusic(bool dontDestroyOnLoad)
     {
-        PlayRandom(musicClips, Vector3.zero, musicVolume);
+        GameObject musicObject = GameObject.Find(musicSourceName);
+
+        if (musicObject == null)
+        {
+            AudioSource source = PlayRandom(musicClips, Vector3.zero, musicVolume, false, false);
+            source.loop = true;
+            source.gameObject.name = musicSourceName;
+
+            if (dontDestroyOnLoad && source != null)
+            {
+                DontDestroyOnLoad(source.gameObject);
+            }
+        }
     }
 
     public void PlayWinSound()
