@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   width: 7
-  height: 9
+  height: 7
   borderSize: 2
   tileNormalPrefab: {fileID: 3064616798710935114, guid: b5ebd12935daf4b9bbd5fccffcd81462,
     type: 3}
@@ -358,21 +358,6 @@ MonoBehaviour:
   startingGamePieces:
   - prefab: {fileID: 360123016615172549, guid: e77385def4216426bb3272b81c0a75e4, type: 3}
     x: 4
-    y: 8
-    z: 0
-  - prefab: {fileID: 1593418193887360686, guid: c6e1de50be0d446aab734ca4936788d3,
-      type: 3}
-    x: 4
-    y: 5
-    z: 0
-  - prefab: {fileID: 5988262699353960789, guid: 62129cab2258f4ed3b86c2fa5aa28c1c,
-      type: 3}
-    x: 4
-    y: 4
-    z: 0
-  - prefab: {fileID: 5988262699353960789, guid: 62129cab2258f4ed3b86c2fa5aa28c1c,
-      type: 3}
-    x: 5
     y: 6
     z: 0
   fillYOffset: 10

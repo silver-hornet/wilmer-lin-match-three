@@ -108,7 +108,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
 --- !u!114 &7194441941100635794
 MonoBehaviour:
@@ -126,6 +126,8 @@ MonoBehaviour:
   yIndex: 0
   interpolation: 0
   matchValue: 0
+  scoreValue: 20
+  clearSound: {fileID: 0}
 --- !u!114 &536726795956478797
 MonoBehaviour:
   m_ObjectHideFlags: 0
