@@ -698,7 +698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movesLeft: 10
-  scoreGoal: 500
+  scoreGoal: 2500
   screenFader: {fileID: 1367973535}
   levelNameText: {fileID: 2054622436}
   movesLeftText: {fileID: 1515980554}
@@ -1208,7 +1208,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86342903afa624c989df4855db00c984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicClips: []
+  musicClips:
+  - {fileID: 8300000, guid: e75e89afb6e1648e7a4a2ac64328a7c0, type: 3}
+  - {fileID: 8300000, guid: e5e029a21fda14206a9ff1423a1302a9, type: 3}
   winClips:
   - {fileID: 8300000, guid: 5f9fb0bfcf06e4304aab13b97645fe13, type: 3}
   loseClips:

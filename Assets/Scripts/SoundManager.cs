@@ -74,7 +74,7 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlayLoseSound()
     {
-        PlayRandom(loseClips, Vector3.zero, fxVolume);
+        PlayRandom(loseClips, Vector3.zero, fxVolume * 0.5f);
     }
 
     public void PlayBonusSound()

@@ -21,7 +21,7 @@ public class Board : MonoBehaviour
 
     public int maxCollectibles = 3;
     public int collectibleCount = 0;
-    [Range(0,1)] public float chanceForCollectible = 0.1f;
+    [Range(0, 1)] public float chanceForCollectible = 0.1f;
     public GameObject[] collectiblePrefabs;
 
     GameObject m_clickedTileBomb;
@@ -861,6 +861,11 @@ public class Board : MonoBehaviour
             else
             {
                 m_scoreMultiplier++;
+                if (SoundManager.Instance != null)
+                {
+                    SoundManager.Instance.PlayBonusSound();
+                }
+
                 yield return StartCoroutine(ClearAndCollapseRoutine(matches));
             }
         }
