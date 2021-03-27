@@ -330,36 +330,12 @@ MonoBehaviour:
     x: 2
     y: 2
     z: 0
-  - prefab: {fileID: 7526009591046200743, guid: 6ecfa55947a98469590d15b4177715c3,
-      type: 3}
-    x: 2
-    y: 3
-    z: 0
-  - prefab: {fileID: 7526009591046200743, guid: 6ecfa55947a98469590d15b4177715c3,
-      type: 3}
-    x: 2
-    y: 4
-    z: 0
-  - prefab: {fileID: 7526009591046200743, guid: 6ecfa55947a98469590d15b4177715c3,
-      type: 3}
-    x: 2
-    y: 5
-    z: 0
-  - prefab: {fileID: 3577393267178891853, guid: 7d834385fde944171b02b82d7bff8e52,
-      type: 3}
-    x: 4
-    y: 2
-    z: 0
   - prefab: {fileID: 3577393267178891853, guid: 7d834385fde944171b02b82d7bff8e52,
       type: 3}
     x: 4
     y: 3
     z: 0
-  startingGamePieces:
-  - prefab: {fileID: 360123016615172549, guid: e77385def4216426bb3272b81c0a75e4, type: 3}
-    x: 4
-    y: 6
-    z: 0
+  startingGamePieces: []
   fillYOffset: 10
   fillMoveTime: 0.5
 --- !u!4 &174144693
@@ -411,7 +387,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &177569450
 MonoBehaviour:
@@ -434,10 +410,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: a4cd8c14a07954de1904bd5228d66793, type: 3}
-    m_FontSize: 50
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 5
+    m_MinSize: 0
     m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -597,10 +573,10 @@ RectTransform:
   m_Father: {fileID: 2032377342}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: 0}
-  m_SizeDelta: {x: 400, y: 400}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 100, y: 100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &280254464
 MonoBehaviour:
@@ -1968,6 +1944,7 @@ GameObject:
   - component: {fileID: 2032377342}
   - component: {fileID: 2032377344}
   - component: {fileID: 2032377343}
+  - component: {fileID: 2032377345}
   m_Layer: 5
   m_Name: BottomPanel
   m_TagString: Untagged
@@ -2032,6 +2009,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032377341}
   m_CullTransparentMesh: 0
+--- !u!223 &2032377345
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032377341}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &2054622434
 GameObject:
   m_ObjectHideFlags: 0
@@ -2090,7 +2088,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: a4cd8c14a07954de1904bd5228d66793, type: 3}
-    m_FontSize: 100
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
